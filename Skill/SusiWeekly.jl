@@ -23,7 +23,7 @@ Susi = HermesMQTT
 SKILL_INTENT_ACTIONS = Tuple{AbstractString, AbstractString, 
                              Module, Function}[]
 
-Susi.load_two_configs(APP_DIR, skill=APP_NAME)
+Susi.load_skill_configs(APP_DIR, skill=APP_NAME)
 
 Susi.set_module(MODULE_NAME)
 Susi.set_appdir(APP_DIR)

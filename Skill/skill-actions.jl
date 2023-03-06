@@ -39,21 +39,19 @@ function Susi_WeeklySchedule_action(topic, payload)
     profile = extract_slot_value(SLOT_PROFILE, payload, default="summer")
 
     # fix missing end info:
-    #
-    if isnothing(end_year) 
-        end_year = Dates.year(Dates.today())
-    end
-    if isnothing(end_month) 
-        end_month = Dates.month(Dates.today())
-    end
-    
     # end day is essetial:
     #
     if isnothing(end_day) 
         publish_end_session(:no_dates, :say_again)
         return true
-    end
 
+    elseif isnothing(end_year) && isnothing(end_month) # && !isnothing(end_day)
+        end_date = Dates.Date(Dates.year(Dates.today()), Dates.month(Dates.today()), end_day) |> next_month()
+   
+    elseif isnothing(end_year) 
+        end_date = Dates.Date(Dates.year(Dates.today()), end_month, end_day) |> next_year()
+    end
+    
     # fix missing start info:
     #
     if isnothing(start_year) 

@@ -1,4 +1,4 @@
-#
+
 # API function go here, to be called by the
 # skill-actions (and trigger-actions):
 #
@@ -74,3 +74,7 @@ function publish_one_schedule(device, command, exec_time, exec_day)
     end
     
 end
+
+
+
+

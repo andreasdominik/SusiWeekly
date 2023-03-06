@@ -9,11 +9,6 @@ gestern:yesterday
 (Freitag | nächsten Freitag | kommenden Freitag):next_friday
 (Samstag | nächsten Samstag | kommenden Samstag):next_saturday
 (Sonntag | nächsten Sonntag | kommenden Sonntag):next_sunday
-(Heiligabend | heiliger Abend | heiligen Abend):xmas_eve
-Silvester:new_years_eve
+(Heiligabend | heiliger Abend | zum heiligen Abend):xmas_eve
+(Silvester | [zum] Jahresende):new_years_eve
 Neujahr:new_year
-Ostersamstag:easter_saturday
-Ostersonntag:easter_sunday
-Ostermontag:easter_monday
-Pfingsten:pentecost
-Allerheiligen:all_saints_day

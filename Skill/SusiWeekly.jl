@@ -30,6 +30,7 @@ Susi.set_appdir(APP_DIR)
 Susi.set_appname(APP_NAME)
 
 include("api.jl")
+include("date_utils.jl")
 include("skill-actions.jl")
 include("exported.jl")
 include("config.jl")

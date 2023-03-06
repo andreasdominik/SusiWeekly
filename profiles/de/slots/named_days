@@ -10,5 +10,7 @@ gestern:yesterday
 (Samstag | nächsten Samstag | kommenden Samstag):next_saturday
 (Sonntag | nächsten Sonntag | kommenden Sonntag):next_sunday
 (Heiligabend | heiliger Abend | zum heiligen Abend):xmas_eve
-(Silvester | [zum] Jahresende):new_years_eve
+(Weihnachten | (erster | [zum] ersten) Weihnachtsfeiertag):xmas1
+(zweiter | [zum] zweiten) Weihnachtsfeiertag):xmas2
+(Silvester | [zum] Jahresende):new_year_eve
 Neujahr:new_year

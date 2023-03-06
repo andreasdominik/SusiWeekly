@@ -27,16 +27,40 @@ function Susi_WeeklySchedule_action(topic, payload)
 
     # get slots:
     #
-    #start_day = tryparse(Int, extract_slot_value(SLOT_DAY_FROM, payload))
-    start_day = tryparse(Int, extract_slot_value(SLOT_DAY_FROM, payload, default=""))
-    start_month = tryparse(Int, extract_slot_value(SLOT_MONTH_FROM, payload, default=""))
-    start_year = tryparse(Int, extract_slot_value(SLOT_YEAR_FROM, payload, default=""))
+    # make start date:
+    #
+    start_day = extract_slot_value(SLOT_DAY_FROM, payload, as=String)
+    start_year, start_month, start_day = named_day(start_day)   # nothing if no match!
+
+    if isnothing(start_day)
+        start_day = extract_slot_value(SLOT_DAY_FROM, payload, as=Int)
+    end
+    if isnothing(start_month)
+        start_month = extract_slot_value(SLOT_MONTH_FROM, payload, as=Int)
+    end
+    start_year = extract_slot_value(SLOT_YEAR_FROM, payload, as=Int)
     
-    end_day = tryparse(Int, extract_slot_value(SLOT_DAY_TO, payload, default=""))
-    end_month = tryparse(Int, extract_slot_value(SLOT_MONTH_TO, payload, default=""))
-    end_year = tryparse(Int, extract_slot_value(SLOT_YEAR_TO, payload, default=""))
- 
-    profile = extract_slot_value(SLOT_PROFILE, payload, default="summer")
+    # make start date:
+    #
+    end_day = extract_slot_value(SLOT_DAY_FROM, payload, as=String)
+    end_day, end_month = named_day(end_day)   # nothing if no match!
+
+    if isnothing(end_day)
+        end_day = extract_slot_value(SLOT_DAY_FROM, payload, as=Int)
+    end
+    if isnothing(end_month)
+        end_month = extract_slot_value(SLOT_MONTH_FROM, payload, as=Int)
+    end
+
+    profile = extract_slot_value(SLOT_PROFILE, payload, default="default")
+
+    print_log("start_day: $start_day")
+    print_log("start_month: $start_month")
+    print_log("start_year: $start_year")
+    print_log("end_day: $end_day")
+    print_log("end_month: $end_month")
+    print_log("end_year: $end_year")
+    print_log("profile: $profile")
 
     # fix missing end info:
     # end day is essetial:

@@ -1,0 +1,19 @@
+heute:today
+morgen:tomorrow
+übermorgen:day_after
+gestern:yesterday
+(Montag | nächsten Montag | kommenden Montag):next_monday
+(Dienstag | nächsten Dienstag | kommenden Dienstag):next_tuesday
+(Mittwoch | nächsten Mittwoch | kommenden Mittwoch):next_wednesday
+(Donnerstag | nächsten Donnerstag | kommenden Donnerstag):next_thursday
+(Freitag | nächsten Freitag | kommenden Freitag):next_friday
+(Samstag | nächsten Samstag | kommenden Samstag):next_saturday
+(Sonntag | nächsten Sonntag | kommenden Sonntag):next_sunday
+(Heiligabend | heiliger Abend | heiligen Abend):xmas_eve
+Silvester:new_years_eve
+Neujahr:new_year
+Ostersamstag:easter_saturday
+Ostersonntag:easter_sunday
+Ostermontag:easter_monday
+Pfingsten:pentecost
+Allerheiligen:all_saints_day

@@ -1,12 +1,12 @@
-(januar | eins):1
-(februar | zwei):2
-(märz | drei):3
-(april | vier):4
-(mai | fünf):5
-(juni | sechs):6
-(juli | sieben):7
-(august | acht):8
-(september | neun):9
-(oktober | zehn):10
-(november | elf):11
-(dezember | zwölf):12
+(januar | eins | ersten):1
+(februar | zwei | zweiten):2
+(märz | drei | dritten):3
+(april | vier | vierten):4
+(mai | fünf | fünften):5
+(juni | sechs | sechsten):6
+(juli | sieben | siebten):7
+(august | acht | achten):8
+(september | neun | neunten):9
+(oktober | zehn | zehnten):10
+(november | elf | elften):11
+(dezember | zwölf | zwölften):12

@@ -20,14 +20,14 @@
 #
 [global]
 this_skill_name = SusiWeekly
-language = de
-site_id = susi
 
 # actions to be performed for each profile:
 #
+profiles = default, summer, winter, irrigation
 default = saytime
 summer = saytime, saytime
 winter = light1on, light1off, light2on, light2off
+irrigation = saytime
 
 # actions:
 #
@@ -81,6 +81,7 @@ irrigationoff:times = 22:30
 
 # names of profiles:
 #
+:irrigation = Bewässerung
 :summer = Sommer
 :winter = Winter
 :default = Standard

@@ -5,7 +5,7 @@
 # If the identified day is in the past, weeks, months or years are 
 # added until it is in the future (i.e. after base).
 #
-function named_day(name, base=Dates.today())
+function named_day(name; base=Dates.today())
 
     weekdays = ["monday", "tuesday", "wednesday", "thursday", 
                 "friday", "saturday", "sunday"]
@@ -24,14 +24,14 @@ function named_day(name, base=Dates.today())
         return Dates.today() + Dates.Day(2)
 
     elseif name == "yesterday"
-        return Dates.today() - Dates.Day(1)
+        return Dates.today() # no programming in the past!  - Dates.Day(1)
 
     elseif name in weekdays
         weekday = findfirst(x -> x == name, weekdays)
         base_weekday = Dates.dayofweek(base)
         day = Dates.today() + Dates.Day(weekday - base_weekday)
 
-        # this may be inthe future or in the past -> step weeks
+        # this may be in the future or in the past -> step weeks
         # to find the first possible weekday in theftutre or today:
         #
         day = step_week(day, base=base)

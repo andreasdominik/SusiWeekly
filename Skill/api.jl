@@ -77,4 +77,14 @@ end
 
 
 
+# return true only if all slots are not nothing:
+#
+all_defined(slots...) = all_not_nothing(slots...)
 
+function all_not_nothing(slots...)
+    return all(x->!isnothing(x), slots)
+end
+
+function all_nothing(slots...)
+    return all(isnothing, slots)
+end

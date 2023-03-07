@@ -77,7 +77,7 @@ function Susi_WeeklyScheduleOneDay_action(topic, payload)
     start_year = extract_slot_value(SLOT_YEAR, payload, as=Int)
 
     start_date = named_day(start_named_day,)   # nothing if no match!
-    if isnothing(start_date)
+    if !isnothing(start_date)
         start_year, start_month, start_day = Dates.yearmonthday(start_date)
     end
     
@@ -96,6 +96,8 @@ function fix_dates_and_run(payload,
                            start_day, start_month, start_year, 
                            end_day, end_month, end_year)
 
+    #   println("start_day: $start_day, start_month: $start_month, start_year: $start_year")
+    #   println("end_day: $end_day, end_month: $end_month, end_year: $end_year")
     # fix missing end info:
     #
     # end day is essetial:
@@ -139,7 +141,6 @@ function fix_dates_and_run(payload,
     end
     start_day, start_month, start_year = Dates.yearmonthday(start_date)
 
-    println("FIXED start_date: $start_date")
     # if end is ready from slots:
     #
     if all_defined(end_day, end_month, end_year)
@@ -158,7 +159,9 @@ function fix_dates_and_run(payload,
         end_date = step_year(end_date, base=start_date)
     end
     end_year, end_month, end_day = Dates.yearmonthday(end_date)
-    println("FIXED end_date: $end_date")
+
+    # println("FIXED start_date: $start_date")
+    # println("FIXED end_date: $end_date")
 
 
     if end_date < start_date
@@ -174,9 +177,13 @@ function fix_dates_and_run(payload,
 
     publish_say(:i_will_schedule, Symbol(profile), :from, 
             readable_date(start_date), 
-        :to, readable_date(end_date))
+            :to, readable_date(end_date))
 
-#    do_schedule(start_date, end_date, profile)
+    
+    # schedule after reread config:
+    #
+    load_skill_config(APP_DIR, skill=APP_NAME)
+    do_schedule(start_date, end_date, profile)
 
     publish_end_session(:end_say)
     return true
@@ -197,7 +204,7 @@ function Susi_DeleteSchedule_action(topic, payload)
     publish_say(:skill_echo, get_intent(payload))
 
     if ask_yes_or_no(:ask_echo_slots)
-publish_say(:no_slot)
+        publish_say(:no_slot)
     else   # ask returns false
         # do nothing
     end

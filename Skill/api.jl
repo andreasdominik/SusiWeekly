@@ -14,16 +14,15 @@ function do_schedule(start_date, end_date, profile)
     for device in devices
         # get device info:
         #
-        set_config_prefix(device)
-        command = get_config(CONFIG_COMMAND)
+        command = get_config(CONFIG_COMMAND, one_prefix=device)
+        time_strings = get_config(CONFIG_TIMES, multiple=true, 
+                                  one_prefix=device)
 
-        time_strings = get_config(CONFIG_TIMES, multiple=true)
         times = [Dates.Time(t) for t in time_strings]
 
-        day_abbrs = get_config(CONFIG_DAYS, multiple=true)
+        day_abbrs = get_config(CONFIG_DAYS, multiple=true, 
+                                  one_prefix=device)
         days_of_week = mk_days_of_week(day_abbrs)
-
-        reset_config_prefix()
 
         # schedule device for all days:
         #
@@ -34,6 +33,7 @@ function do_schedule(start_date, end_date, profile)
                 #
                 if Dates.dayofweek(exec_day) in days_of_week
                     publish_one_schedule(device, command, exec_time, exec_day)
+                    sleep(1)
                 end
             end
             exec_day += Dates.Day(1)
@@ -94,22 +94,22 @@ end
 
 function check_profile(profile)
 
-    if !is_in_config(profile)
+    actions = get_config(profile, multiple=true)
+    if isnothing(actions)
         publish_say(:no_profile, :i_heard, profile)
         return false
-    end
-
-    actions = get_config(profile, multiple=true)
     
-    ok = true
-    for a in actions
-        if !all([is_in_config("$a:$CONFIG_COMMAND"), 
-                 is_in_config("$a:$CONFIG_DAYS"), 
-                 is_in_config("$a:$CONFIG_TIMES")])
+    else
+        ok = true
+        for a in actions
+            if !all([is_in_config("$a:$CONFIG_COMMAND"), 
+                     is_in_config("$a:$CONFIG_DAYS"), 
+                     is_in_config("$a:$CONFIG_TIMES")])
 
-            publish_say(:incomplete_profile_1, a, :incomplete_profile_2) 
-            ok = false
+                publish_say(:incomplete_profile_1, a, :incomplete_profile_2) 
+                ok = false
+            end
         end
+        return ok
     end
-    return ok
 end

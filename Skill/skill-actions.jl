@@ -63,16 +63,6 @@ function Susi_WeeklySchedule_action(topic, payload)
 
     profile = extract_slot_value(SLOT_PROFILE, payload, default="default")
 
-    print_log("start_date: $start_date")
-    print_log("  start_day: $start_day")
-    print_log("  start_month: $start_month")
-    print_log("  start_year: $start_year")
-    print_log("end_date: $end_date")
-    print_log("  end_day: $end_day")
-    print_log("  end_month: $end_month")
-    print_log("  end_year: $end_year")
-    print_log("profile: $profile")
-
     # fix missing end info:
     #
     # end day is essetial:

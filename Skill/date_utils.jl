@@ -7,8 +7,9 @@
 #
 function named_day(name; base=Dates.today())
 
-    weekdays = ["monday", "tuesday", "wednesday", "thursday", 
-                "friday", "saturday", "sunday"]
+println(">>> end_day1: $name")
+    weekdays = ["next_monday", "next_tuesday", "next_wednesday", "next_thursday", 
+                "next_friday", "next_saturday", "next_sunday"]
 
     if isnothing(name) || !(name isa AbstractString)
         return nothing
@@ -29,10 +30,11 @@ function named_day(name; base=Dates.today())
     elseif name in weekdays
         weekday = findfirst(x -> x == name, weekdays)
         base_weekday = Dates.dayofweek(base)
-        day = Dates.today() + Dates.Day(weekday - base_weekday)
+        day = base + Dates.Day(weekday - base_weekday)
 
+println(">>> weekday: $weekday, base_weekday: $base_weekday, day: $day")
         # this may be in the future or in the past -> step weeks
-        # to find the first possible weekday in theftutre or today:
+        # to find the first possible weekday in the future or today:
         #
         day = step_week(day, base=base)
         return day

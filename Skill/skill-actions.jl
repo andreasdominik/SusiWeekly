@@ -61,6 +61,16 @@ function Susi_WeeklySchedule_action(topic, payload)
         end_year, end_month, end_day = Dates.yearmonthday(end_date)
     end
 
+    return fix_dates_and_run(payload, start_day, start_month, start_year, 
+                             end_day, end_month, end_year)
+end
+
+
+
+
+function fix_dates_and_run(payload, 
+                           start_day, start_month, start_year, 
+                           end_day, end_month, end_year)
 
     # fix missing end info:
     #
@@ -145,7 +155,6 @@ function Susi_WeeklySchedule_action(topic, payload)
 #    do_schedule(start_date, end_date, profile)
 
     publish_end_session(:end_say)
-println("bye")
     return true
 end
 

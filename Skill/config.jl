@@ -13,10 +13,13 @@ const LANG = get_language()
 # Slots:
 # Name of slots to be extracted from intents:
 #
+const SLOT_DAY = "day"
 const SLOT_DAY_FROM = "day_from"
 const SLOT_DAY_TO = "day_to"
+const SLOT_MONTH = "month"
 const SLOT_MONTH_FROM = "month_from"
 const SLOT_MONTH_TO = "month_to"
+const SLOT_YEAR = "year"
 const SLOT_YEAR_FROM = "year_from"
 const SLOT_YEAR_TO = "year_to"
 const SLOT_PROFILE = "profile"
@@ -35,4 +38,5 @@ CONFIG_TIMES = "times"
 # Susi.register_intent_action("TEMPLATE_SKILL", TEMPLATE_INTENT_action)
 # Susi.register_on_off_action(TEMPLATE_INTENT_action)
 register_intent_action("Susi:WeeklySchedule", Susi_WeeklySchedule_action)
+register_intent_action("Susi:WeeklyScheduleOneDay", Susi_WeeklyScheduleOneDay_action)
 register_intent_action("Susi:DeleteSchedule", Susi_DeleteSchedule_action)

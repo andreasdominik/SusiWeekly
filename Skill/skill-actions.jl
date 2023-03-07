@@ -18,8 +18,8 @@
 """
     Susi_WeeklySchedule_action(topic, payload)
 
-Generated dummy action for the intent Susi:WeeklySchedule.
-This function will be executed when the intent is recognized.
+This function will be executed when the intent 
+"Susi:WeeklySchedule" is recognized.
 """
 function Susi_WeeklySchedule_action(topic, payload)
 
@@ -65,6 +65,45 @@ function Susi_WeeklySchedule_action(topic, payload)
                              end_day, end_month, end_year)
 end
 
+
+"""
+    Susi_WeeklyScheduleOne_action(topic, payload)
+
+This function will be executed when the intent 
+"Susi:WeeklyScheduleOneDay" is recognized.
+"""
+function Susi_WeeklyScheduleOneDay_action(topic, payload)
+
+    print_log("action Susi_WeeklyScheduleOneDay_action() started.")
+
+    # get slots:
+    #
+    start_year = start_month = start_day = start_date = nothing
+    end_year = end_month = end_day = end_date = nothing
+
+    # make start date:
+    #
+    start_day = extract_slot_value(SLOT_DAY, payload, as=String)
+    start_date = named_day(start_day)   # nothing if no match!
+
+    if isnothing(start_date)
+        start_day = extract_slot_value(SLOT_DAY, payload, as=Int)
+        start_month = extract_slot_value(SLOT_MONTH, payload, as=Int)
+        start_year = extract_slot_value(SLOT_YEAR, payload, as=Int)
+    else
+        start_year, start_month, start_day = Dates.yearmonthday(start_date)
+    end
+    
+    # make end date the same as start date:
+    #
+    end_date = start_date
+    end_year, end_month, end_day = start_year, start_month, start_day
+
+    return fix_dates_and_run(payload, start_day, start_month, start_year, 
+                             end_day, end_month, end_year)
+end
+
+ nd
 
 
 

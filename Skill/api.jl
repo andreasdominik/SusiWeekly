@@ -88,3 +88,28 @@ end
 function all_nothing(slots...)
     return all(isnothing, slots)
 end
+
+
+
+
+function check_profile(profile)
+
+    if !is_in_config(profile)
+        publish_say(:no_profile, :i_heard, profile)
+        return false
+    end
+
+    actions = get_config(profile, multiple=true)
+    
+    ok = true
+    for a in actions
+        if !all([is_in_config("$a:$CONFIG_COMMAND"), 
+                 is_in_config("$a:$CONFIG_DAYS"), 
+                 is_in_config("$a:$CONFIG_TIMES")])
+
+            publish_say(:incomplete_profile_1, a, :incomplete_profile_2) 
+            ok = false
+        end
+    end
+    return ok
+end

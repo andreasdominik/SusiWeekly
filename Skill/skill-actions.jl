@@ -61,7 +61,6 @@ function Susi_WeeklySchedule_action(topic, payload)
         end_year, end_month, end_day = Dates.yearmonthday(end_date)
     end
 
-    profile = extract_slot_value(SLOT_PROFILE, payload, default="default")
 
     # fix missing end info:
     #
@@ -132,6 +131,12 @@ function Susi_WeeklySchedule_action(topic, payload)
         publish_end_session(:end_before_start)
         return true
     end
+
+    profile = extract_slot_value(SLOT_PROFILE, payload, default="default")
+    if !check_profile(profile)
+        publish_end_session(:check_profile)
+        return true
+    end 
 
     publish_say(:i_will_schedule, Symbol(profile), :from, 
             readable_date(start_date), 

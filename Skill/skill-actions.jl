@@ -25,39 +25,32 @@ function Susi_WeeklySchedule_action(topic, payload)
 
     print_log("action Susi_WeeklySchedule_action() started.")
 
-    # get slots:
-    #
-    start_year = start_month = start_day = start_date = nothing
-    end_year = end_month = end_day = end_date = nothing
-
     # make start date:
     #
-    start_day = extract_slot_value(SLOT_DAY_FROM, payload, as=String)
-    start_date = named_day(start_day)   # nothing if no match!
-
-    if isnothing(start_date)
-        start_day = extract_slot_value(SLOT_DAY_FROM, payload, as=Int)
-        start_month = extract_slot_value(SLOT_MONTH_FROM, payload, as=Int)
-        start_year = extract_slot_value(SLOT_YEAR_FROM, payload, as=Int)
-    else
+    start_named_day = extract_slot_value(SLOT_DAY_FROM, payload, as=String)
+    start_day = extract_slot_value(SLOT_DAY_FROM, payload, as=Int)
+    start_month = extract_slot_value(SLOT_MONTH_FROM, payload, as=Int)
+    start_year = extract_slot_value(SLOT_YEAR_FROM, payload, as=Int)
+    
+    start_date = named_day(start_named_day, year=start_year)   # nothing if no match!
+    if !isnothing(start_date)
         start_year, start_month, start_day = Dates.yearmonthday(start_date)
     end
     
     # make end date:
     #
-    end_day = extract_slot_value(SLOT_DAY_TO, payload, as=String)
+    end_named_day = extract_slot_value(SLOT_DAY_TO, payload, as=String)
+    end_day = extract_slot_value(SLOT_DAY_TO, payload, as=Int)
+    end_month = extract_slot_value(SLOT_MONTH_TO, payload, as=Int)
+    end_year = extract_slot_value(SLOT_YEAR_TO, payload, as=Int)
 
     if isnothing(start_date)
-        end_date = named_day(end_day, base=Dates.today())   
+        base=Dates.today()
     else
-        end_date = named_day(end_day, base=start_date)   # nothing if no match!
+        base = start_date
     end
-
-    if isnothing(end_date)
-        end_day = extract_slot_value(SLOT_DAY_TO, payload, as=Int)
-        end_month = extract_slot_value(SLOT_MONTH_TO, payload, as=Int)
-        end_year = extract_slot_value(SLOT_YEAR_TO, payload, as=Int)
-    else
+    end_date = named_day(end_named_day, base=base, year=end_year)   # nothing if no match!
+    if !isnothing(end_date)
         end_year, end_month, end_day = Dates.yearmonthday(end_date)
     end
 
@@ -76,34 +69,26 @@ function Susi_WeeklyScheduleOneDay_action(topic, payload)
 
     print_log("action Susi_WeeklyScheduleOneDay_action() started.")
 
-    # get slots:
-    #
-    start_year = start_month = start_day = start_date = nothing
-    end_year = end_month = end_day = end_date = nothing
-
     # make start date:
     #
-    start_day = extract_slot_value(SLOT_DAY, payload, as=String)
-    start_date = named_day(start_day)   # nothing if no match!
+    start_named_day = extract_slot_value(SLOT_DAY, payload, as=String)
+    start_day = extract_slot_value(SLOT_DAY, payload, as=Int)
+    start_month = extract_slot_value(SLOT_MONTH, payload, as=Int)
+    start_year = extract_slot_value(SLOT_YEAR, payload, as=Int)
 
+    start_date = named_day(start_named_day,)   # nothing if no match!
     if isnothing(start_date)
-        start_day = extract_slot_value(SLOT_DAY, payload, as=Int)
-        start_month = extract_slot_value(SLOT_MONTH, payload, as=Int)
-        start_year = extract_slot_value(SLOT_YEAR, payload, as=Int)
-    else
         start_year, start_month, start_day = Dates.yearmonthday(start_date)
     end
     
     # make end date the same as start date:
     #
     end_date = start_date
-    end_year, end_month, end_day = start_year, start_month, start_day
+    end_year, end_month, end_day = Dates.yearmonthday(end_date)
 
     return fix_dates_and_run(payload, start_day, start_month, start_year, 
                              end_day, end_month, end_year)
 end
-
- nd
 
 
 

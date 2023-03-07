@@ -5,9 +5,14 @@
 # If the identified day is in the past, weeks, months or years are 
 # added until it is in the future (i.e. after base).
 #
-function named_day(name; base=Dates.today())
+function named_day(name; base=Dates.today(), year=nothing)
 
-println(">>> end_day1: $name")
+    named_days = Dict("xmas_eve" => (12, 24),
+                      "xmas1" => (12, 25),
+                      "xmas2" => (12, 26),
+                      "new_year_eve" => (12, 31),
+                      "new_year" => (1, 1))
+
     weekdays = ["next_monday", "next_tuesday", "next_wednesday", "next_thursday", 
                 "next_friday", "next_saturday", "next_sunday"]
 
@@ -32,28 +37,20 @@ println(">>> end_day1: $name")
         base_weekday = Dates.dayofweek(base)
         day = base + Dates.Day(weekday - base_weekday)
 
-println(">>> weekday: $weekday, base_weekday: $base_weekday, day: $day")
         # this may be in the future or in the past -> step weeks
         # to find the first possible weekday in the future or today:
         #
         day = step_week(day, base=base)
         return day
 
-    elseif name == "xmas_eve"
-        return next_year_with_date(12, 24, base=base)
+    elseif name in keys(named_days)
+        month, day = named_days[name]
+        if isnothing(year)
+            return next_year_with_date(month, day, base=base)
+        else
+            return Dates.Date(year, month, day)
+        end
 
-    elseif name == "xmas1"
-        return next_year_with_date(12, 25, base=base)
-
-    elseif name == "xmas2"
-        return next_year_with_date(12, 26, base=base)
-
-    elseif name == "new_year_eve"
-        return next_year_with_date(12, 31, base=base)
-
-    elseif name == "new_year"
-        return next_year_with_date(1, 1, base=base)
-    
     else
         return nothing
     end

@@ -1,6 +1,6 @@
 # SusiWeekly - Snips/Rhasspy Skill
 
-Simple skill to proram a weekly schedule for a Snips-like hime assistant
+Simple skill to proram a weekly schedule for a Snips-like home assistant
 (i.e. Rhasspy).     
 The skill is written in Julia with the HermesMQTT.jl framework.
 

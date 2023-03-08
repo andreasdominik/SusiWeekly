@@ -30,6 +30,7 @@ const SLOT_PROFILE = "profile"
 CONFIG_COMMAND = "command"
 CONFIG_DAYS = "days"
 CONFIG_TIMES = "times"
+CONFIG_FUZZY = "fuzzy"
 
 #
 # link between actions and intents:

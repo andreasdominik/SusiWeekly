@@ -23,41 +23,50 @@ this_skill_name = SusiWeekly
 
 # actions to be performed for each profile:
 #
-profiles = default, summer, winter, irrigation
 default = saytime
-summer = saytime, saytime
-winter = light1on, light1off, light2on, light2off
-irrigation = saytime
+summer = light_on_living_room, light_off_living_room
+winter = light_on_living_room, light_off_living_room, light_on_kitchen, light_off_kitchen
+irrigation = water_on, water_off
 
 # actions:
 #
+# for each action define:
+#
+#   action:command = plain text to be interpreted by the rhasspy nlu
+#   action:days = list of week days
+#   action:times = list of execute times as hour or h:min or h:min:sec
+#   action:fuzzy = optional number of minutes to make times fuzzy
+
 saytime:command = wie spät ist es
 saytime:days = mo, tu, we, th, fr, sa, su
-saytime:times = 17:30
+saytime:times = 18:25, 18:30
+saytime:fuzzy = 10
 
-light1on:command = switch on the light in the kitchen
-light1on:days = mo, tu, we, th, fr, sa, su
-light1on:times = 06:00, 19:00
+light_on_living_room:command = switch on the light in the living room
+light_on_living_room:days = mo, tu, we, th, fr, sa, su
+light_on_living_room:times = 8, 18:30
 
-light1off:command = switch off the light in the kitchen
-light1off:days = mo, tu, we, th, fr, sa, su
-light1off:times = 07:00, 22:00
+light_off_living_room:command = switch off the light in the living room
+light_off_living_room:days = mo, tu, we, th, fr, sa, su
+light_off_living_room:times = 9:15, 23:20
 
-light2on:command = switch on the light in the living room
-light2on:days = mo, we, fr, su
-light2on:times = 20:00
+light_on_kitchen:command = switch on the light in the kitchen
+light_on_kitchen:days = mo, tu, we, th, fr, sa, su
+light_on_kitchen:times = 7:30
 
-light2off:command = switch off the light in the living room
-light2off:days = mo, we, fr, su
-light2off:times = 23:00
+light_off_kitchen:command = switch off the light in the kitchen
+light_off_kitchen:days = mo, tu, we, th, fr, sa, su
+light_off_kitchen:times = 8:30
 
-irrigationon:command = switch on the irrigation
-irrigationon:days = mo, we, fr
-irrigationon:times = 22:00
 
-irrigationoff:command = switch off the irrigation
-irrigationoff:days = mo, we, fr
-irrigationoff:times = 22:30
+water_on:command = switch on the irrigation
+water_on:days = mo, we, fr
+water_on:times = 22:00
+water_on:fuzzy = 15
+
+water_off:command = switch off the irrigation
+water_off:days = mo, we, fr
+water_off:times = 22:30
 
 
 
@@ -71,13 +80,15 @@ irrigationoff:times = 22:30
 :i_will_schedule = ich programmiere das profil
 :from =       vom
 :to =         bis
-
-:skill_echo =  Hallo, ich bin die Hermes-Skill
-:slot_echo_1 = der Wert des Slots
-:slot_echo_2 = ist
-:end_say =     Programmierung abgeschlossen
-:ask_echo_slots = soll ich die Slots des Intent aufsagen?
-:no_slots =    der Intent hat keine Slots
+:end_before_start = Das geht so nicht! Das Ende liegt vor dem Anfang!
+:end_before_start = Das Enddatum darf nicht vor dem Anfangsdatum liegen!
+:no_dates =   Ich konnte nicht verstehen, von wann bis wann ich Programmieren soll.
+:no_profile = Ich konnte nicht verstehen, welches Profil ich Programmieren soll.
+:i_heard =     verstanden habe ich
+:incomplete_profile_1 = die Aktion 
+:incomplete_profile_2 = ist unvollständig konfiguriert.
+:check_profile = bitte prüfe das gewünschte Profil.
+:end_say = fertig
 
 # names of profiles:
 #
@@ -87,11 +98,27 @@ irrigationoff:times = 22:30
 :default = Standard
 
 [en]
-:skill_echo =  hello, i am the Hermes skill
-:slot_echo_1 = the value of the slot
-:slot_echo_2 = is
-:end_say =     and done
-:ask_echo_slots = do you want me to list the slots of this intent?
-:no_slots =    the intent has no slots
+:i_will_schedule = i will schedule the profle
+:from =       beginning at
+:from =       from
+:to =         to
+:to =         until
+:end_before_start = That is not possible! The end is before the start!
+:end_before_start = The end date must not be before the start date!
+:no_dates =   I could not understand, from when to when I should schedule.
+:no_profile = I could not understand, which profile I should schedule.
+:i_heard =     I got
+:incomplete_profile_1 = the action
+:incomplete_profile_2 = is not configured completely.
+:check_profile = please check the desired profile.
+:end_say = done
+
+# names of profiles:
+#
+:irrigation = irrigation
+:summer = summer
+:winter = winter
+:default = default
+
 
 

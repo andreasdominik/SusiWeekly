@@ -17,8 +17,20 @@ function do_schedule(start_date, end_date, profile)
         command = get_config(CONFIG_COMMAND, one_prefix=device)
         time_strings = get_config(CONFIG_TIMES, multiple=true, 
                                   one_prefix=device)
+        fuzzy_minutes = 0
+        if is_in_config(CONFIG_FUZZY, one_prefix=device)
+            val = tryparse(Int, get_config(CONFIG_FUZZY, one_prefix=device))
+            if !isnothing(val)
+                fuzzy_minutes = val
+            end
+        end
 
         times = [Dates.Time(t) for t in time_strings]
+
+        # make times fuzzy:
+        #
+        times = times .+ 
+                Dates.Minute.(rand(-fuzzy_minutes:fuzzy_minutes, length(times)))
 
         day_abbrs = get_config(CONFIG_DAYS, multiple=true, 
                                   one_prefix=device)

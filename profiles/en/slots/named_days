@@ -1,0 +1,21 @@
+today:today
+tomorrow:tomorrow
+(day after tomorrow):day_after
+yesterday:yesterday
+(monday | next moday):next_monday
+(tuesday | next tuesday):next_tuesday
+(wednesday | next wednesday):next_wednesday
+(thursday | next thursday):next_thursday
+(friday | next friday):next_friday
+(saturday | next saturday):next_saturday
+(sunday | next sunday):next_sunday
+(christmas (eve | day | night):xmas_eve
+christmas:xmas1
+(senond christmas day | boxing day):xmas2
+(new (years | year s | year | eve) | [the] end of the year):new_year_eve
+(new year):new_year
+(independence day):independence_day
+(easter | (easter sunday)):easter_sunday
+(easter monday):easter_monday
+(good friday):good_friday
+(thanksgiving | (thanksgiving day)):thanksgiving

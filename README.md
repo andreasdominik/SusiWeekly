@@ -39,7 +39,7 @@ Each action is defined by 3 or 4 paramaters in the config.ini file:
 
 + **command**: the command to be executed as plain text. Each command
             the NLU (natural language understanding) engine is able to
-            recognise is valid (such as *"turn on the light in teh living room"*).
+            recognise is valid (such as *"turn on the light in the living room"*).
 + **days**: comma-separated list of days of the week (e.g. `mo, tu, we`).
             The command is executed on these days only.
 + **times**: comma-separated list of times (e.g. `8, 12:10, 18:00`).

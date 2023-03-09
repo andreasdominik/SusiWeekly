@@ -119,9 +119,21 @@ irrigation:irrigation
 ### program wakeup music
 
 The schedule can now be programmed by voice command:
-*Rhasspy, start the programming from tomorrow until the end of the year 
+*Rhasspy, start the automation from tomorrow until the end of the year 
 with the profile wake up with Beethoven*.
 
+
+## Slots
+
+The skill comes with some slot lists that can be also used with
+other intents:
+
+### days_of_month
+Recognise days of the month in a voice command (e.g. *the 15th of the month*).
+
+### named days
+Includes the week days and yearly returning named days
+(such as *monday, tuesday, today, yesterday, tomorrow* and *Christmas, New Year's Eve, Thanksgiving Day*, etc.).
 
 
 

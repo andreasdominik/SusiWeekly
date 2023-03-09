@@ -13,6 +13,10 @@ However "Pythonians" often need some time to get familiar with Julia.
 
 If you are ready for the step forward, start here: https://julialang.org/
 
+Learn more about writing skills in Julia with HermesMQTT.jl here: 
+ [![](https://img.shields.io/badge/docs-latest-blue.svg)](https://andreasdominik.github.io/HermesMQTT.jl/dev)
+
+
 
 ## Installation
 

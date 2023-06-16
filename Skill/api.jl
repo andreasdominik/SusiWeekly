@@ -27,10 +27,6 @@ function do_schedule(start_date, end_date, profile)
 
         times = [Dates.Time(t) for t in time_strings]
 
-        # make times fuzzy:
-        #
-        times = times .+ 
-                Dates.Minute.(rand(-fuzzy_minutes:fuzzy_minutes, length(times)))
 
         day_abbrs = get_config(CONFIG_DAYS, multiple=true, 
                                   one_prefix=device)
@@ -40,9 +36,13 @@ function do_schedule(start_date, end_date, profile)
         #
         exec_day = start_date
         while exec_day <= end_date
+            # schedule device for day:
+            #
             for exec_time in times
-                # schedule device for day:
+                # make times fuzzy:
                 #
+                time += Dates.Minute(rand(-fuzzy_minutes:fuzzy_minutes))
+
                 if Dates.dayofweek(exec_day) in days_of_week
                     publish_one_schedule(device, command, exec_time, exec_day)
                     sleep(1)

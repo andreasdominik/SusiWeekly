@@ -177,7 +177,7 @@ function fix_dates_and_run(payload,
 
     publish_say(:i_will_schedule, Symbol(profile), :from, 
             readable_date(start_date), 
-            :to, readable_date(end_date))
+            :to, readable_date(end_date), wait=false)
 
     
     # schedule after reread config:

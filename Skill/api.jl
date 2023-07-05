@@ -26,8 +26,6 @@ function do_schedule(start_date, end_date, profile)
         end
 
         times = [Dates.Time(t) for t in time_strings]
-
-
         day_abbrs = get_config(CONFIG_DAYS, multiple=true, 
                                   one_prefix=device)
         days_of_week = mk_days_of_week(day_abbrs)
@@ -41,7 +39,7 @@ function do_schedule(start_date, end_date, profile)
             for exec_time in times
                 # make times fuzzy:
                 #
-                time += Dates.Minute(rand(-fuzzy_minutes:fuzzy_minutes))
+                exec_time += Dates.Minute(rand(-fuzzy_minutes:fuzzy_minutes))
 
                 if Dates.dayofweek(exec_day) in days_of_week
                     publish_one_schedule(device, command, exec_time, exec_day)

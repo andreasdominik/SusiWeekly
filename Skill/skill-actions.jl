@@ -201,7 +201,6 @@ This function will be executed when the intent is recognized.
 function Susi_DeleteSchedule_action(topic, payload)
 
     print_log("action Susi_DeleteSchedule_action() started.")
-    publish_say(:skill_echo, get_intent(payload))
 
     if ask_yes_or_no(:ask_echo_slots)
         publish_say(:no_slot)

@@ -41,3 +41,4 @@ CONFIG_FUZZY = "fuzzy"
 register_intent_action("Susi:WeeklySchedule", Susi_WeeklySchedule_action)
 register_intent_action("Susi:WeeklyScheduleOneDay", Susi_WeeklyScheduleOneDay_action)
 register_intent_action("Susi:DeleteSchedule", Susi_DeleteSchedule_action)
+register_intent_action("Susi:DeleteScheduleToday", Susi_DeleteScheduleToday_action)
